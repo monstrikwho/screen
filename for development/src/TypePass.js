@@ -107,23 +107,28 @@ function TypePass({ goBack, done }) {
     }
   }, [pass]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      const activeSlide = document.querySelector(".owl-item.active.center");
-      const offsetActiveSlide = activeSlide.getBoundingClientRect();
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     const activeSlide = document.querySelector(".owl-item.active.center");
+  //     const offsetActiveSlide = activeSlide.getBoundingClientRect();
 
-      const activeBlock = document.querySelector(".active-item");
-      activeBlock.style.top = offsetActiveSlide.top + "px";
-      activeBlock.style.left = offsetActiveSlide.left + "px";
-    }, 0);
-  });
+  //     const activeBlock = document.querySelector(".active-item");
+  //     activeBlock.style.top = offsetActiveSlide.top + "px";
+  //     activeBlock.style.left = offsetActiveSlide.left + "px";
+  //   }, 0);
+  // });
 
   const options = {
-    items: 5,
+    items: 7,
     dots: false,
-    nav: false,
-    center: true,
+    // center: true,
     callbacks: true,
+    touchDrag: false,
+    nav: true,
+    navText: [
+      '<i class="fas fa-arrow-alt-circle-left"></i>',
+      '<i class="fas fa-arrow-circle-right"></i>',
+    ],
   };
 
   return (
@@ -137,7 +142,7 @@ function TypePass({ goBack, done }) {
         </div>
       </Modal>
 
-      <div className="active-item"></div>
+      {/* <div className="active-item"></div> */}
 
       <div className="input-pass">
         <div className="input-block">
@@ -161,10 +166,7 @@ function TypePass({ goBack, done }) {
             className="item"
             key={key}
             onClick={(e) => {
-              const parent = e.target.parentNode;
-              if (parent.className.indexOf("center") !== -1) {
-                setPass(pass.concat(e.target.innerText));
-              }
+              setPass(pass.concat(e.target.innerText));
             }}
           >
             {item}

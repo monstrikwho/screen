@@ -107,16 +107,27 @@ function TypePass({ goBack, done }) {
     }
   }, [pass]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     const activeSlide = document.querySelector(".owl-item.active.center");
-  //     const offsetActiveSlide = activeSlide.getBoundingClientRect();
-
-  //     const activeBlock = document.querySelector(".active-item");
-  //     activeBlock.style.top = offsetActiveSlide.top + "px";
-  //     activeBlock.style.left = offsetActiveSlide.left + "px";
-  //   }, 0);
-  // });
+  useEffect(() => {
+    setTimeout(() => {
+      const nextBtn = document.querySelector(".owl-next");
+      const prevBtn = document.querySelector(".owl-prev");
+      const nextClick = () => nextBtn.click();
+      const prevClick = () => prevBtn.click();
+      let every1s = null;
+      nextBtn.addEventListener("touchstart", (e) => {
+        every1s = setInterval(nextClick, 60);
+      });
+      nextBtn.addEventListener("touchend", (e) => {
+        clearInterval(every1s);
+      });
+      prevBtn.addEventListener("touchstart", (e) => {
+        every1s = setInterval(prevClick, 60);
+      });
+      prevBtn.addEventListener("touchend", (e) => {
+        clearInterval(every1s);
+      });
+    }, 0);
+  });
 
   const options = {
     items: 7,
